@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ItsaMeDesignio.Views.ItemsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:ItsaMeDesignio.Models"
+    xmlns:styles="clr-namespace:ItsaMeDesignio.Styles"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Name="BrowseItemsPage"
+    Title="{Binding Title}"
+    Padding="{OnPlatform iOS='0,60,0,0'}"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <ContentPage.Resources>
+        <styles:Styles />
+    </ContentPage.Resources>
+    <StackLayout>
+        <Grid HeightRequest="200">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0" Margin="20">
+                <StackLayout Orientation="Horizontal">
+                    <Label
+                        FontSize="30"
+                        Style="{StaticResource headerLabel}"
+                        Text="Andreas" />
+                    <Label
+                        FontSize="30"
+                        Style="{StaticResource textLabel}"
+                        Text="Nesheim" />
+                </StackLayout>
+                <Label
+                    FontSize="18"
+                    Style="{StaticResource textLabel}"
+                    Text="Choose your journey" />
+            </StackLayout>
+            <yummy:PancakeView
+                Grid.Column="1"
+                CornerRadius="35"
+                HeightRequest="70"
+                HorizontalOptions="Center"
+                IsClippedToBounds="True"
+                VerticalOptions="Center"
+                WidthRequest="70">
+                <Image Aspect="AspectFill" Source="profilepic" />
+            </yummy:PancakeView>
+            <yummy:PancakeView
+                Grid.Column="1"
+                Margin="12,30,0,0"
+                BackgroundColor="#fa8e75"
+                BorderColor="White"
+                BorderThickness="7"
+                CornerRadius="10"
+                HeightRequest="20"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                WidthRequest="20" />
+        </Grid>
+        <BoxView
+            Margin="20,0"
+            BackgroundColor="LightGray"
+            HeightRequest="0.5" />
+        <StackLayout Margin="20" Orientation="Horizontal">
+            <Label
+                FontSize="30"
+                Style="{StaticResource headerLabel}"
+                Text="Discounts" />
+            <Label
+                Margin="0,3,0,0"
+                FontSize="26"
+                Style="{StaticResource textLabel}"
+                Text="on tours" />
+        </StackLayout>
+
+        <RefreshView Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+            <CollectionView
+                x:Name="ItemsListView"
+                BackgroundColor="#f7f7f7"
+                ItemsSource="{Binding Items}"
+                SelectionChanged="ItemsListView_SelectionChanged"
+                SelectionMode="Single"
+                VerticalOptions="FillAndExpand">
+                <d:CollectionView.ItemsSource>
+                    <x:Array Type="{x:Type models:Item}">
+                        <models:Item
+                            Description="This is a description! Lorem ipsum dolor sit amet bla bla bla sdkfl sdk fmlsdf. Her odp åsd æ?"
+                            Icon="&#xf2d5;"
+                            Price="319"
+                            Subtitle="&amp; australia"
+                            Text="Asia" />
+                        <models:Item
+                            Description="This is a description!"
+                            Icon="&#xf2d1;"
+                            Price="521"
+                            Subtitle="&amp; northern"
+                            Text="Scandinavian" />
+                        <models:Item
+                            Description="This is a description!"
+                            Icon="&#xf2d5;"
+                            Price="743"
+                            Subtitle="debuts in fall"
+                            Text="Sky Princess" />
+                        <models:Item
+                            Description="This is a description!"
+                            Icon="&#xf2d5;"
+                            Subtitle="amazing"
+                            Text="Experience" />
+                    </x:Array>
+                </d:CollectionView.ItemsSource>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="20" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Item">
+                        <yummy:PancakeView
+                            Margin="10"
+                            Padding="10"
+                            BackgroundColor="White"
+                            CornerRadius="20"
+                            HeightRequest="120"
+                            HorizontalOptions="FillAndExpand">
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                        FontSize="18"
+                                        LineBreakMode="NoWrap"
+                                        Style="{StaticResource headerLabel}"
+                                        Text="{Binding Text}" />
+                                    <Label
+                                        FontSize="18"
+                                        LineBreakMode="NoWrap"
+                                        Style="{StaticResource textLabel}"
+                                        Text="{Binding Subtitle}" />
+                                    <yummy:PancakeView
+                                        BackgroundColor="#fefdf3"
+                                        CornerRadius="15"
+                                        HeightRequest="30"
+                                        HorizontalOptions="EndAndExpand"
+                                        WidthRequest="70">
+                                        <StackLayout
+                                            HorizontalOptions="Center"
+                                            Orientation="Horizontal"
+                                            VerticalOptions="Center">
+                                            <Label
+                                                FontFamily="{StaticResource MaterialFontFamily}"
+                                                FontSize="20"
+                                                Text="&#xf4ce;"
+                                                TextColor="#f7b602" />
+                                            <Label
+                                                FontSize="16"
+                                                Style="{StaticResource textLabel}"
+                                                Text="4.5"
+                                                TextColor="#f7b602" />
+                                        </StackLayout>
+                                    </yummy:PancakeView>
+                                    <yummy:PancakeView
+                                        BackgroundColor="#fefdf3"
+                                        CornerRadius="15"
+                                        HeightRequest="30"
+                                        WidthRequest="30">
+                                        <Label
+                                            FontFamily="{StaticResource MaterialFontFamily}"
+                                            FontSize="20"
+                                            HorizontalOptions="Center"
+                                            Text="{Binding Icon}"
+                                            TextColor="#ff4545"
+                                            VerticalOptions="Center" />
+                                    </yummy:PancakeView>
+                                </StackLayout>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="3*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <yummy:PancakeView
+                                        Margin="50,0,0,0"
+                                        CornerRadius="10"
+                                        HeightRequest="60"
+                                        HorizontalOptions="Center"
+                                        Opacity="0.4"
+                                        VerticalOptions="Center"
+                                        WidthRequest="90">
+                                        <Image Aspect="AspectFill" Source="majesty.jpg" />
+                                    </yummy:PancakeView>
+                                    <yummy:PancakeView
+                                        Margin="25,0,0,0"
+                                        CornerRadius="10"
+                                        HeightRequest="70"
+                                        HorizontalOptions="Center"
+                                        Opacity="0.7"
+                                        VerticalOptions="Center"
+                                        WidthRequest="100">
+                                        <Image Aspect="AspectFill" Source="astor.jpg" />
+                                    </yummy:PancakeView>
+                                    <yummy:PancakeView
+                                        CornerRadius="10"
+                                        HeightRequest="80"
+                                        HorizontalOptions="Center"
+                                        Opacity="1"
+                                        VerticalOptions="Center"
+                                        WidthRequest="110">
+                                        <Image Aspect="AspectFill" Source="aidaluna.jpg" />
+                                    </yummy:PancakeView>
+
+                                    <Label
+                                        Grid.Column="1"
+                                        Margin="10,0,0,0"
+                                        FontSize="14"
+                                        LineBreakMode="WordWrap"
+                                        Style="{StaticResource textLabel}"
+                                        Text="{Binding Description}" />
+                                    <Label
+                                        Grid.Column="1"
+                                        Margin="0,0,10,0"
+                                        FontSize="17"
+                                        HorizontalOptions="End"
+                                        Text="{Binding Price, StringFormat='$ {0:}'}"
+                                        VerticalOptions="End" />
+                                </Grid>
+
+                            </StackLayout>
+                        </yummy:PancakeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
+</ContentPage>

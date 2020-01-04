@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ItsaMeDesignio.Views.ItemDetailPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customViews="clr-namespace:ItsaMeDesignio.CustomViews"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:ItsaMeDesignio.Models"
+    xmlns:styles="clr-namespace:ItsaMeDesignio.Styles"
+    xmlns:viewModels="clr-namespace:ItsaMeDesignio.ViewModels"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    Title="{Binding Title}"
+    x:DataType="viewModels:ItemDetailViewModel"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <ContentPage.Resources>
+        <styles:Styles />
+    </ContentPage.Resources>
+    <ScrollView>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="300" />
+                </Grid.RowDefinitions>
+
+                <yummy:PancakeView
+                    CornerRadius="0,0,30,30"
+                    HasShadow="True"
+                    HeightRequest="300"
+                    IsClippedToBounds="True">
+
+                    <CarouselView x:Name="imagesCarousel" ItemsSource="{Binding CarouselImages}">
+                        <CarouselView.ItemsLayout>
+                            <LinearItemsLayout
+                                Orientation="Vertical"
+                                SnapPointsAlignment="Start"
+                                SnapPointsType="MandatorySingle" />
+                        </CarouselView.ItemsLayout>
+                        <d:CarouselView.ItemsSource>
+                            <x:Array Type="{x:Type models:CarouselImage}">
+                                <models:CarouselImage Source="majesty.jpg" />
+                                <models:CarouselImage Source="astor.JPG" />
+                                <models:CarouselImage Source="mecklenburg.jpg" />
+                            </x:Array>
+                        </d:CarouselView.ItemsSource>
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate x:DataType="models:CarouselImage">
+                                <Image
+                                    Aspect="AspectFill"
+                                    HeightRequest="300"
+                                    Source="{Binding Source}" />
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+
+                </yummy:PancakeView>
+
+                <customViews:VerticalIndicatorView
+                    x:Name="indicatorView"
+                    Margin="0,125,0,0"
+                    HeightRequest="50"
+                    HorizontalOptions="End"
+                    IndicatorColor="White"
+                    ItemsSourceBy="imagesCarousel"
+                    SelectedIndicatorColor="Black"
+                    VerticalOptions="StartAndExpand" />
+
+                <yummy:PancakeView
+                    Margin="0,0,0,-30"
+                    BackgroundColor="White"
+                    CornerRadius="30"
+                    HasShadow="True"
+                    HeightRequest="60"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    WidthRequest="60">
+                    <yummy:PancakeView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </yummy:PancakeView.GestureRecognizers>
+                    <Label
+                        x:Name="heartLabel"
+                        FontFamily="{StaticResource MaterialFontFamily}"
+                        FontSize="22"
+                        HorizontalOptions="Center"
+                        Text="&#xf2d1;"
+                        TextColor="#ff4545"
+                        VerticalOptions="Center" />
+                </yummy:PancakeView>
+
+                <Label
+                    Margin="20,0,0,30"
+                    HorizontalOptions="Start"
+                    Style="{StaticResource textLabel}"
+                    Text="128 reviews"
+                    TextColor="White"
+                    VerticalOptions="End" />
+
+                <Label
+                    Margin="20,10,0,0"
+                    FontSize="40"
+                    HorizontalOptions="Start"
+                    Style="{StaticResource textLabel}"
+                    Text="&lt;"
+                    TextColor="White"
+                    VerticalOptions="Start">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </Grid>
+
+            <StackLayout Margin="20">
+                <Label
+                    FontSize="26"
+                    Style="{StaticResource headerLabel}"
+                    Text="Discover the" />
+                <Label
+                    Margin="0,0,0,40"
+                    FontSize="16"
+                    Style="{StaticResource textLabel}"
+                    Text="World of Viking Cruises" />
+
+                <CollectionView
+                    x:Name="categoryCollectionView"
+                    HeightRequest="100"
+                    ItemsSource="{Binding Categories}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="30" Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+
+                    <d:CollectionView.ItemsSource>
+                        <x:Array x:Name="categoryItems" Type="{x:Type models:Category}">
+                            <models:Category
+                                Icon="&#xf10a;"
+                                Opacity="1.0"
+                                Text="All"
+                                Color="#fa947c" />
+                            <models:Category
+                                Icon="&#xf0e7;"
+                                Opacity="0.2"
+                                Text="Bus"
+                                Color="LightGreen" />
+                            <models:Category
+                                Icon="&#xf2f5;"
+                                Opacity="0.2"
+                                Text="Tour"
+                                Color="LightBlue" />
+                            <models:Category
+                                Icon="&#xf780;"
+                                Opacity="0.2"
+                                Text="Map"
+                                Color="Yellow" />
+                            <models:Category
+                                Icon="&#xf2f8;"
+                                Opacity="0.2"
+                                Text="Food"
+                                Color="Purple" />
+                            <models:Category
+                                Icon="&#xf2d1;"
+                                Opacity="0.2"
+                                Text="Tour"
+                                Color="Red" />
+                        </x:Array>
+                    </d:CollectionView.ItemsSource>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Category">
+                            <StackLayout>
+                                <yummy:PancakeView
+                                    BackgroundColor="{Binding Color}"
+                                    CornerRadius="30"
+                                    HeightRequest="60"
+                                    Opacity="{Binding Opacity}"
+                                    WidthRequest="60">
+                                    <Label
+                                        FontFamily="{StaticResource MaterialFontFamily}"
+                                        FontSize="22"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Icon}"
+                                        TextColor="White"
+                                        VerticalOptions="Center" />
+                                    <yummy:PancakeView.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" />
+                                    </yummy:PancakeView.GestureRecognizers>
+                                </yummy:PancakeView>
+                                <Label
+                                    Margin="0,10,0,0"
+                                    HorizontalOptions="Center"
+                                    Style="{StaticResource textLabel}"
+                                    Text="{Binding Text}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label
+                    Margin="0,20,0,0"
+                    FontSize="16"
+                    LineHeight="2">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                FontSize="16"
+                                Style="{StaticResource headerLabel}"
+                                Text="Best of Italy" />
+                            <Span
+                                FontSize="16"
+                                Style="{StaticResource textLabel}"
+                                Text=" (16 destinations) includes accommodation as well as an expert guide, meails, transport and more." />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <yummy:PancakeView Style="{StaticResource personCircle}">
+                        <Image Aspect="AspectFill" Source="profilepic" />
+                    </yummy:PancakeView>
+                    <yummy:PancakeView Margin="38,0,0,0" Style="{StaticResource personCircle}">
+                        <Image Aspect="AspectFill" Source="profilepic" />
+                    </yummy:PancakeView>
+                    <yummy:PancakeView Margin="76,0,0,0" Style="{StaticResource personCircle}">
+                        <Image Aspect="AspectFill" Source="profilepic" />
+                    </yummy:PancakeView>
+                    <yummy:PancakeView Margin="114,0,0,0" Style="{StaticResource personCircle}">
+                        <Image Aspect="AspectFill" Source="profilepic" />
+                    </yummy:PancakeView>
+
+                    <yummy:PancakeView
+                        Grid.Column="1"
+                        Padding="5"
+                        BackgroundColor="LightGoldenrodYellow"
+                        CornerRadius="15"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="Center">
+                        <StackLayout
+                            HorizontalOptions="Center"
+                            Orientation="Horizontal"
+                            VerticalOptions="Center">
+                            <Label
+                                FontFamily="{StaticResource MaterialFontFamily}"
+                                FontSize="20"
+                                Text="&#xf2d1;"
+                                TextColor="Red" />
+                            <Label
+                                FontSize="16"
+                                Style="{StaticResource textLabel}"
+                                Text="+178"
+                                TextColor="Red" />
+                        </StackLayout>
+                    </yummy:PancakeView>
+
+                    <yummy:PancakeView
+                        Grid.Column="2"
+                        Padding="5"
+                        BackgroundColor="LightGoldenrodYellow"
+                        CornerRadius="15"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="Center">
+                        <StackLayout
+                            HorizontalOptions="Center"
+                            Orientation="Horizontal"
+                            VerticalOptions="Center">
+                            <Label
+                                FontFamily="{StaticResource MaterialFontFamily}"
+                                FontSize="20"
+                                Text="&#xf369;"
+                                TextColor="Cyan" />
+                            <Label
+                                FontSize="16"
+                                Style="{StaticResource textLabel}"
+                                Text="14"
+                                TextColor="Cyan" />
+                        </StackLayout>
+                    </yummy:PancakeView>
+
+                </Grid>
+
+                <Button
+                    Padding="20"
+                    BackgroundColor="#fa947c"
+                    CornerRadius="25"
+                    Text="Book a tour"
+                    TextColor="White" />
+
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

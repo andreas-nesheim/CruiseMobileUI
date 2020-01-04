@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="ItsaMeDesignio.Styles.Styles"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+
+    <Style x:Key="headerLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="{OnPlatform Android=Raleway-Black.ttf#Raleway-Black, iOS=Raleway-Black}" />
+    </Style>
+    <Style x:Key="textLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="{OnPlatform Android=Raleway-Regular.ttf#Raleway-Regular, iOS=Raleway-Regular}" />
+    </Style>
+    <Style TargetType="Button">
+        <Setter Property="FontFamily" Value="{OnPlatform Android=Raleway-Regular.ttf#Raleway-Regular, iOS=Raleway-Regular}" />
+    </Style>
+
+    <Style x:Key="personCircle" TargetType="yummy:PancakeView">
+        <Setter Property="BorderColor" Value="White" />
+        <Setter Property="BorderThickness" Value="10" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="WidthRequest" Value="50" />
+        <Setter Property="CornerRadius" Value="25" />
+        <Setter Property="IsClippedToBounds" Value="True" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
+    <OnPlatform x:Key="MaterialFontFamily" x:TypeArguments="x:String">
+        <On Platform="iOS" Value="Material Design Icons" />
+        <On Platform="Android" Value="materialdesignicons-webfont.ttf#Material Design Icons" />
+    </OnPlatform>
+</ResourceDictionary>
